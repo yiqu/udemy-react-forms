@@ -3,6 +3,7 @@ import styles from './Core.module.scss';
 import React, { useEffect, useReducer, useState, useContext, useMemo, useCallback } from 'react';
 import Address from './address/Address';
 import AddressProvider from './AddressProvider';
+import Email from './email/Email';
 
 
 const Core = () => {
@@ -15,6 +16,8 @@ const Core = () => {
         <Address></Address>
 
       </AddressProvider>
+
+      <Email></Email>
 
     </div>
   );
