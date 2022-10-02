@@ -1,0 +1,23 @@
+.parent {
+  display: flex;
+  flex-direction: column;
+
+  .cata {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    justify-content: flex-start;
+    align-items: center;
+
+    .label {
+      font-weight: 400;
+      font-family: 'Lato';
+    }
+  
+    .value {
+      font-size: 12px;
+      background-color:#EEEEEE;
+      font-family:Consolas,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New;
+    }
+  }
+}

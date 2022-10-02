@@ -12,12 +12,12 @@ export const getEmailValidation = (filedId) => {
 
 export const getNumberValidation = (filedId, min, errMsg) => {
   return Yup.number().min(Yup.number().cast(min), `Has to be greater than ${min}`)
-    .required(`${filedId} is required`).trim();
+    .required(`${filedId} is required`);
 };
 
 export const validationSchema = Yup.object({
-  firstName: getTextValidation('firstName', 3),
-  lastName: getTextValidation('lastName', 3),
+  firstName: getTextValidation('firstName', 3).matches(/^[a-zA-Z]+$/),
+  lastName: getTextValidation('lastName', 3).matches(/^[a-zA-Z]+$/),
   email: getEmailValidation('email'),
   jobTitle: getTextValidation('jobTitle', 3),
   address: getTextValidation('address', 3),

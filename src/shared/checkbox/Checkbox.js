@@ -17,7 +17,7 @@ const FormikCheckbox = ({children, ...props}) => {
         { children}
       </label>
       {
-        meta.touched && meta.error ? (<div className="text-danger">
+        meta.touched && meta.error ? (<div className="text-danger form-error">
           {meta.error}
         </div>) : null
       }

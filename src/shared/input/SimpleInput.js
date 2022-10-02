@@ -3,7 +3,6 @@ import styles from './SimpleInput.module.scss';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Formik, Form, useField } from 'formik';
-import * as Yup from 'yup';
  
 const FormikTextInput = ({ label, ...props }) => {
   // useField() returns [formik.getFieldProps(), formik.getFieldMeta()]
@@ -19,10 +18,10 @@ const FormikTextInput = ({ label, ...props }) => {
         {label}
       </label>
 
-      <input className="text-input" { ...field } { ...props } />
+      <input className="form-control" { ...field } { ...props } />
 
       { meta.touched && meta.error ? (
-        <div className="text-danger">{ meta.error }</div>
+        <div className="text-danger form-error">{ meta.error }</div>
       ) : null }
 
     </>

@@ -14,7 +14,7 @@ const AddressForm = ({formik, submitHandler}) => {
   useEffect(() => {
     console.log("hi");
     validateForm();
-  }, []);
+  }, [validateForm]);
   return (
 
     <form onSubmit={ formik.handleSubmit } className={ `${styles.parent} my-3` }>
