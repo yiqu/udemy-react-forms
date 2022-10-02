@@ -14,3 +14,15 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.roboto {
+  font-family: 'Roboto';
+}
+
+.poppins {
+  font-family: 'Poppins', sans-serif;
+}
+
+.lato {
+  font-family: 'Lato', sans-serif;
+}

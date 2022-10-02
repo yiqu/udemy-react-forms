@@ -4,15 +4,15 @@ import Core from './Core';
 
 function App() {
 
-  const title = 'Forms!';
+  const title = 'User registration';
   
   return (
     <div className="App container my-3">
-      <div>
+      <div className="poppins font-weight-bold">
         { title }
       </div>
       
-      <div className="my-5">
+      <div className="mt-2">
         <Core></Core>
       </div>
     </div>

@@ -2,8 +2,7 @@
 import styles from './Core.module.scss';
 import React, { useEffect, useReducer, useState, useContext, useMemo, useCallback } from 'react';
 import Address from './address/Address';
-import AddressProvider from './AddressProvider';
-import Email from './email/Email';
+import RegisterFormProvider from './RegisterFormProvider';
 
 
 const Core = () => {
@@ -11,11 +10,11 @@ const Core = () => {
   return (
     <div className={ `${styles.parent}` }>
 
-      <AddressProvider>
+      <RegisterFormProvider>
 
         <Address></Address>
 
-      </AddressProvider>
+      </RegisterFormProvider>
 
     </div>
   );

@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import styles from './Street.module.scss';
 import React, { useEffect, useReducer, useState, useContext, useMemo, useCallback } from 'react';
-import { AddressContext } from '../../AddressProvider';
+import { AddressContext } from '../../RegisterFormProvider';
 
 const Street = () => {
   console.log("street render");
