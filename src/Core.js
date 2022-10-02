@@ -17,8 +17,6 @@ const Core = () => {
 
       </AddressProvider>
 
-      <Email></Email>
-
     </div>
   );
 };

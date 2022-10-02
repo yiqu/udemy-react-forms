@@ -43,10 +43,6 @@ const AddressProvider = (props) => {
 
   return (
     <>
-      <div>
-        {JSON.stringify(address)}
-      </div>
-
       <AddressContext.Provider value={ {
         streetName: address.streetName,
         updateStreetName: updateStreetNameHandler
