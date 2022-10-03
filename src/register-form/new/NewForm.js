@@ -30,21 +30,33 @@ const NewForm = () => {
 
   return (
     <React.Fragment>
-      <div>
-        <button onClick={ randomUserHandler } className='btn btn-info'>Randomize a user</button>
-      </div>
-      <Formik
-        initialValues={ registerContext.defaultUser }
-        validationSchema={ validationSchema }
-        onSubmit={ submitUserHandler }
-      >
-        {
-          (formik) => {
-           return <UserForm formik={ formik } randomUser={ registerContext.defaultUser } 
-            submitFn={ registerContext.postUserFn } apiLoading={ registerContext.apiLoading }></UserForm>;
-          }
-        }
-      </Formik>
+
+      {
+        registerContext.isAddingNewUser ? (
+          <>
+            <div>
+              <button onClick={ randomUserHandler } className='btn btn-info mb-3'>Randomize a user</button>
+            </div>
+            <Formik
+              initialValues={ registerContext.defaultUser }
+              validationSchema={ validationSchema }
+              onSubmit={ submitUserHandler }
+            >
+              {
+                (formik) => {
+                return <UserForm formik={ formik } randomUser={ registerContext.defaultUser } 
+                  submitFn={ registerContext.postUserFn } apiLoading={ registerContext.apiLoading }
+                  cancelAddFn = { registerContext.cancelAddFn }></UserForm>;
+                }
+              }
+            </Formik>
+          </>
+        ) :
+        (
+          <button className='btn btn-primary' onClick={ registerContext.cancelAddFn }>Add new user</button>
+        )
+      }
+      
     </React.Fragment>
     
   );

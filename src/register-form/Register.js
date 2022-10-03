@@ -7,21 +7,12 @@ import NewForm from './new/NewForm';
 
 
 const Registration = () => {
-
-  const [showNewForm, setShowNewForm] = useState(true);
-
-  const toggleNewFormHandler = () => {
-    setShowNewForm((prev) => {
-      return !prev;
-    });
-  };
-
   return (
-    <React.Fragment>
-      { showNewForm ? <NewForm></NewForm> : <div>
-        <button className='btn btn-primary' onClick={ toggleNewFormHandler }>Add new user</button>
-      </div>}
-    </React.Fragment>
+    <div className='mb-3'>
+
+      <NewForm></NewForm> 
+
+    </div>
   );
 };
 

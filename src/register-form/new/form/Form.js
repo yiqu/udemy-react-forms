@@ -11,7 +11,7 @@ import FormikCheckbox from "../../../shared/checkbox/Checkbox";
 import { emptyFormValue } from "../../../RegisterFormProvider";
 
 
-const UserForm = ({formik, randomUser, submitFn, apiLoading}) => {
+const UserForm = ({formik, randomUser, submitFn, apiLoading, cancelAddFn}) => {
   const { values, submitForm , isValid, touched, dirty, isSubmitting, submitCount, handleSubmit, validateForm,
     validateOnMount, validationSchema, setValues, resetForm, setSubmitting } = useFormikContext();
 
@@ -29,6 +29,10 @@ const UserForm = ({formik, randomUser, submitFn, apiLoading}) => {
     resetForm({
       values: emptyFormValue
     });
+  };
+
+  const cancelAddUserHandler = () => {
+    cancelAddFn(false);
   };
 
   return (
@@ -112,10 +116,14 @@ const UserForm = ({formik, randomUser, submitFn, apiLoading}) => {
           </FormikCheckbox>
         </div>
        
-        <div>
-          <button className="btn btn-primary btn-sm mr-2" onClick={ submitHandler } type="button"
+        <div className='d-flex justify-content-between'>
+          <div>
+            <button className="btn btn-primary btn-sm mr-2" onClick={ submitHandler } type="button"
             disabled={ apiLoading }>{ apiLoading ? 'Working...' : 'Submit' }</button>
-          <button type="button" className="btn btn-info btn-sm" onClick={ resetCurrentForm }>Reset</button>
+            <button type="button" className="btn btn-info btn-sm" onClick={ resetCurrentForm }>Reset</button>
+          </div>
+         
+          <button type="button" className="btn btn-danger btn-sm" onClick={ cancelAddUserHandler }>Cancel</button>
         </div>
       </form>
     

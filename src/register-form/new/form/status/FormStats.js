@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import styles from './FormStats.module.scss';
 import React, { useEffect, useReducer, useState, useContext, useMemo, useCallback } from 'react';
+import * as Yup from 'yup';
 
 const FormStats = ({stats}) => {
   const keys = Object.keys(stats);
@@ -9,7 +10,7 @@ const FormStats = ({stats}) => {
       {
         keys.map((res) => {
           return <div key={ res } className={ styles.cata }>
-            <div className={ `${styles.label}` }>{res}:</div>
+            <div className={ `${styles.label}` }>{ res }:</div>
             <div className={ styles.value }>{ JSON.stringify(stats[res])}</div>
           </div>;
         })

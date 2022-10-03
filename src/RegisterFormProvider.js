@@ -5,9 +5,11 @@ import * as fromFireRest from './shared/rest/fire-rest';
 export const RegisterFormContext = React.createContext({
   defaultUser: {},
   previousAddedUser: {},
+  isAddingNewUser: false,
   addUser: () => {},
   postUserFn: () => {},
-  getRandomUser: () => {}
+  getRandomUser: () => {},
+  cancelAddFn: () => {}
 });
 
 export const getUser = () => {
@@ -40,6 +42,7 @@ const RegisterFormProvider = (props) => {
   const [previousAddedUser, setPreviousAddedUser] = useState();
   const [defaultUser, setdefaultUser] = useState(getUser());
   const [apiLoading, setApiLoading] = useState(false);
+  const [isAddingNewUser, setIsAddingNewUser] = useState(false);
 
   const updatePreviousAddedUserHandler = (user) => {
     setPreviousAddedUser((prev) => {
@@ -51,8 +54,12 @@ const RegisterFormProvider = (props) => {
 
   const addNewUser = (user) => {
     console.log("submit: ", user);
+    const u = {
+      dateAdded: new Date().getTime(),
+      ...user
+    };
     setApiLoading(true);
-    fromFireRest.getAddUserRef(user).then((res) => {
+    fromFireRest.getAddUserRef(u).then((res) => {
       return res;
     }).catch((err) => {
       console.log(err);
@@ -67,13 +74,21 @@ const RegisterFormProvider = (props) => {
     });
   };
 
+  const addUserToggle = (add) => {
+    setIsAddingNewUser((prev) => {
+      return add === undefined ? !prev : add;
+    });
+  };
+
   const contextValue = {
     defaultUser: defaultUser,
     previousAddedUser: previousAddedUser,
     apiLoading: apiLoading,
+    isAddingNewUser: isAddingNewUser,
     addUser: addNewUser,
     postUserFn: fromFireRest.getAddUserRef,
-    getRandomUser: getRandomUser
+    getRandomUser: getRandomUser,
+    cancelAddFn: addUserToggle
   };
 
   return (

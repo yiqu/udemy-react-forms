@@ -3,6 +3,7 @@ import styles from './Core.module.scss';
 import React, { useEffect, useReducer, useState, useContext, useMemo, useCallback } from 'react';
 import RegisterFormProvider from './RegisterFormProvider';
 import Registration from './register-form/Register';
+import Users from './users/Users';
 
 
 const Core = () => {
@@ -15,11 +16,8 @@ const Core = () => {
         <Registration></Registration>
 
       </RegisterFormProvider>
-
-      <hr></hr>
-      <div>
-        Current users:
-      </div>
+      
+      <Users></Users>
 
     </div>
   );
