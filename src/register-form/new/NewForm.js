@@ -9,21 +9,23 @@ import UserForm from './form/Form';
 
 
 const NewForm = () => {
-  console.log("new form render");
   const registerContext = useContext(RegisterFormContext);
-
-  const formSettings = {
-    initialValues: {
-      ...registerContext.defaultUser
-    }
-  };
 
   const randomUserHandler = () => {
     registerContext.getRandomUser();
   };
 
   const submitUserHandler = (user) => {
-    console.log("submit", user);
+    registerContext.addUser(user);
+    // const res = registerContext.postUserFn(user).then((res) => {
+    //   console.log(res);
+    //   return res;
+    // }).catch((err) => {
+    //   console.log(err);
+    // }).finally(() => {
+    //   console.log("done");
+    // });
+    // return res;
   };
 
   return (
@@ -32,13 +34,14 @@ const NewForm = () => {
         <button onClick={ randomUserHandler } className='btn btn-info'>Randomize a user</button>
       </div>
       <Formik
-        initialValues={ formSettings.initialValues }
+        initialValues={ registerContext.defaultUser }
         validationSchema={ validationSchema }
         onSubmit={ submitUserHandler }
       >
         {
           (formik) => {
-           return <UserForm formik={ formik } randomUser={ registerContext.defaultUser } ></UserForm>;
+           return <UserForm formik={ formik } randomUser={ registerContext.defaultUser } 
+            submitFn={ registerContext.postUserFn } apiLoading={ registerContext.apiLoading }></UserForm>;
           }
         }
       </Formik>

@@ -16,10 +16,13 @@ export const getNumberValidation = (filedId, min, errMsg) => {
 };
 
 export const validationSchema = Yup.object({
-  firstName: getTextValidation('firstName', 3).matches(/^[a-zA-Z]+$/),
-  lastName: getTextValidation('lastName', 3).matches(/^[a-zA-Z]+$/),
+  firstName: getTextValidation('firstName', 3).matches(/^[a-zA-Z]+$/, {message:'Only letters are allowed'}),
+  lastName: getTextValidation('lastName', 3).matches(/^[a-zA-Z]+$/, {message:'Only letters are allowed'}),
   email: getEmailValidation('email'),
   jobTitle: getTextValidation('jobTitle', 3),
   address: getTextValidation('address', 3),
-  age: getNumberValidation('age', 10)
+  age: getNumberValidation('age', 10),
+  terms: Yup.string().test({name: 'terms', test: (val) => {
+    return val === 'true';
+  }, message: 'Agree to terms before proceeding'})
 });

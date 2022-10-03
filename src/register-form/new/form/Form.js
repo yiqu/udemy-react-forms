@@ -7,18 +7,29 @@ import { useDeepCompareEffect, useShallowCompareEffect, useCustomCompareEffect,
 import FormStats from './status/FormStats';
 import FormikTextInput from '../../../shared/input/SimpleInput';
 import FormikSelect from '../../../shared/select/Select';
+import FormikCheckbox from "../../../shared/checkbox/Checkbox";
+import { emptyFormValue } from "../../../RegisterFormProvider";
 
 
-const UserForm = ({formik, randomUser}) => {
-  console.log("user form render");
+const UserForm = ({formik, randomUser, submitFn, apiLoading}) => {
   const { values, submitForm , isValid, touched, dirty, isSubmitting, submitCount, handleSubmit, validateForm,
-    validateOnMount, validationSchema, setValues, resetForm } = useFormikContext();
+    validateOnMount, validationSchema, setValues, resetForm, setSubmitting } = useFormikContext();
 
   useUpdateEffect(() => {
     resetForm({
       values: randomUser
     });
   }, [randomUser]);
+
+  const submitHandler = (payload) => {
+    handleSubmit();
+  };
+
+  const resetCurrentForm= () => {
+    resetForm({
+      values: emptyFormValue
+    });
+  };
 
   return (
     <>
@@ -29,7 +40,8 @@ const UserForm = ({formik, randomUser}) => {
           isValid,
           touched,
           isSubmitting,
-          submitCount
+          submitCount,
+          apiLoading: apiLoading
         } } />
 
         <div className="form-row">
@@ -41,7 +53,14 @@ const UserForm = ({formik, randomUser}) => {
               placeholder="Enter first name (3)">
             </FormikTextInput>
           </div>
-
+          
+          <div className="form-group col">
+            <FormikTextInput label="Middle Name"
+              name="middleName"
+              type="text"
+              placeholder="Enter middle name (3)">
+            </FormikTextInput>
+          </div>
 
           <div className="form-group col">
             <FormikTextInput label="Last Name"
@@ -76,14 +95,28 @@ const UserForm = ({formik, randomUser}) => {
           </FormikTextInput>
         </div>
         
-        <FormikSelect label="Job Title" name="jobTitle">
-          <option value="">Select a job type</option>
-          <option value="designer">Designer</option>
-          <option value="Software Developer">Software Developer</option>
-          <option value="Software Tester">Software Tester</option>
-          <option value="other">Other</option>
-        </FormikSelect>
+        <div className="form-group">
+          <FormikSelect label="Job Title" name="jobTitle">
+            <option value="">Select a job type</option>
+            <option value="designer">Designer</option>
+            <option value="Software Developer">Software Developer</option>
+            <option value="Software Tester">Software Tester</option>
+            <option value="other">Other</option>
+          </FormikSelect>
+        </div>
+        
 
+        <div className="form-group">
+          <FormikCheckbox label="Privacy" name="terms">
+            Agree to terms
+          </FormikCheckbox>
+        </div>
+       
+        <div>
+          <button className="btn btn-primary btn-sm mr-2" onClick={ submitHandler } type="button"
+            disabled={ apiLoading }>{ apiLoading ? 'Working...' : 'Submit' }</button>
+          <button type="button" className="btn btn-info btn-sm" onClick={ resetCurrentForm }>Reset</button>
+        </div>
       </form>
     
     </>
