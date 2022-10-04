@@ -13,7 +13,8 @@ const FormikSelect = ({ label, ...props }) => {
         {label}
       </label>
 
-      <select { ...field } { ...props } className="form-control form-control-sm" />
+      <select { ...field } { ...props } className={ `form-control form-control-sm 
+        ${meta.touched && meta.error ? 'error-bg' : '' }` } />
 
       {meta.touched && meta.error ? (
         <div className="text-danger form-error">{meta.error}</div>

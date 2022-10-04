@@ -3,74 +3,53 @@ import styles from './Users.module.scss';
 import React, { useEffect, useReducer, useState, useContext, useMemo, useCallback } from 'react';
 import { useFireCollection } from '../shared/firebase/collection-hooks';
 import useWhyDidYouUpdate from '../shared/hooks/whyDidYouUpdate';
-import User from './User/User';
 import DateDisplay from '../shared/date/DateDisplay';
+import UserTable from "./table/Table";
+import Filter from "./filter/Filter";
+import { useDeepCompareEffect } from "react-use";
 
 
 export const Users = () => {
 
   const { values, isLoading, error } = useFireCollection();
 
-  const sorted = useMemo(() => {
+  const [users, setUsers] = useState([]);
+  const [filterText, setFilterText] = useState('');
+
+
+  useDeepCompareEffect(() => {
     let val = [...values];
+    if (filterText) {
+      const filterableKeys = ['firstName', 'lastName', 'sex', 'age', 'address', 'email', 'jobTitle'];
+      const filter = filterText+"".trim();
+      val = val.filter((res) => {
+        let wholeObjectValue = "";
+        filterableKeys.forEach((key) => {
+          wholeObjectValue = wholeObjectValue + res[key];
+        });
+        wholeObjectValue = wholeObjectValue.toLowerCase();
+        return wholeObjectValue.includes(filter);
+      });
+    }
+    
     val.sort((prev, curr) => {
       return (prev.dateAdded ?? 0) < (curr.dateAdded ?? 0) ? 1 : -1;
     });
-    return val;
-    
-  }, [values]);
+    setUsers(val);
+  }, [values, filterText]);
+
+
+  const onFilterHandler = useCallback((text) => {
+    setFilterText(text);
+  }, []);
 
   return (
     <>
-      {
-      isLoading ? 
-      (
-        <div>
-          {isLoading ? 'Loading..' : ''}
-        </div>
-      ) 
-        : 
-      (
-        <div>
-          <div className='poppins fs-13 mb-2'>
-            There are currently { values.length } users.
-          </div>
-          <table>
-            <tbody>
-              <tr>
-                <th>First Name</th>
-                <th>M.</th>
-                <th>Last Name</th>
-                <th>Age</th>
-                <th>Address</th>
-                <th>Email</th>
-                <th>Job</th>
-                <th>ID</th>
-                <th>Date Added</th>
-              </tr>
-
-              { sorted.map((res) => {
-            return (
-              <tr key={ res.id }>
-                <td>{res.firstName}</td>
-                <td>{res.middleName}</td>
-                <td>{res.lastName}</td>
-                <td>{res.age}</td>
-                <td>{res.address}</td>
-                <td>{res.email}</td>
-                <td>{res.jobTitle}</td>
-                <td>{res.id.slice(0, 5)}</td>
-                <td>
-                  <DateDisplay date={ res.dateAdded }></DateDisplay>
-                </td>
-              </tr>
-            );
-          }) }
-            </tbody>
-          </table>
-        </div>
-      )
-      }
+      <div>
+        {filterText}
+      </div>
+      <Filter onFilter={ onFilterHandler }></Filter>
+      <UserTable isLoading={ isLoading } sorted={ users }></UserTable>
     </>
    
   );

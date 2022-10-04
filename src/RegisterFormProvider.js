@@ -17,6 +17,7 @@ export const getUser = () => {
     firstName: Math.random() > 0.5 ? 'Kevin' : 'Bekah',
     middleName: Math.random() > 0.5 ? 'R' : 'Y',
     lastName: Math.random() > 0.5 ? 'Qu' : 'Treadwell',
+    sex: '',
     email: 'kevin@aol.com',
     address: Math.random() > 0.5 ? '1012 Friendly St.' : '1011 Lune Ln.',
     available: false,
@@ -30,6 +31,7 @@ export const emptyFormValue = {
   firstName: '',
   middleName: '',
   lastName: '',
+  sex: '',
   email: '',
   address: '',
   jobTitle: '',
@@ -65,6 +67,7 @@ const RegisterFormProvider = (props) => {
       console.log(err);
     }).finally(() => {
       setApiLoading(false);
+      addUserToggle(false);
     });
   };
 
