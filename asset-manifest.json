@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/udemy-react-forms/static/css/main.1bb3ddf7.css",
-    "main.js": "/udemy-react-forms/static/js/main.7b4896ca.js",
+    "main.css": "/udemy-react-forms/static/css/main.a92d5338.css",
+    "main.js": "/udemy-react-forms/static/js/main.e72f392b.js",
     "static/js/787.8359f4da.chunk.js": "/udemy-react-forms/static/js/787.8359f4da.chunk.js",
     "index.html": "/udemy-react-forms/index.html",
-    "main.1bb3ddf7.css.map": "/udemy-react-forms/static/css/main.1bb3ddf7.css.map",
-    "main.7b4896ca.js.map": "/udemy-react-forms/static/js/main.7b4896ca.js.map",
+    "main.a92d5338.css.map": "/udemy-react-forms/static/css/main.a92d5338.css.map",
+    "main.e72f392b.js.map": "/udemy-react-forms/static/js/main.e72f392b.js.map",
     "787.8359f4da.chunk.js.map": "/udemy-react-forms/static/js/787.8359f4da.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.1bb3ddf7.css",
-    "static/js/main.7b4896ca.js"
+    "static/css/main.a92d5338.css",
+    "static/js/main.e72f392b.js"
   ]
 }
