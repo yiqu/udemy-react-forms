@@ -1,7 +1,8 @@
 .parent {
   display: flex;
   flex-direction: column;
-
+  word-break: break-all;
+  
   .cata {
     display: flex;
     flex-direction: row;
@@ -17,7 +18,7 @@
   
     .value {
       font-size: 12px;
-      background-color:#EEEEEE;
+      background-color:#d9e9e0;
       font-family:Consolas,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New;
     }
   }

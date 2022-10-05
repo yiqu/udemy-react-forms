@@ -9,15 +9,15 @@ import Users from './users/Users';
 const Core = () => {
 
   return (
-    <div className={ `${styles.parent}` }>
+    <div>
 
       <RegisterFormProvider>
 
         <Registration></Registration>
 
+        <Users></Users>
+
       </RegisterFormProvider>
-      
-      <Users></Users>
 
     </div>
   );

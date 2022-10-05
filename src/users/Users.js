@@ -7,9 +7,13 @@ import DateDisplay from '../shared/date/DateDisplay';
 import UserTable from "./table/Table";
 import Filter from "./filter/Filter";
 import { useDeepCompareEffect } from "react-use";
+import { RegisterFormContext } from '../RegisterFormProvider';
 
 
 export const Users = () => {
+  console.log("user rend");
+
+  const registerContext = useContext(RegisterFormContext);
 
   const { values, isLoading, error } = useFireCollection();
 
@@ -43,16 +47,18 @@ export const Users = () => {
     setFilterText(text);
   }, []);
 
+  const onEditUserHandler = (user) => {
+    registerContext.editUser(user);
+  };
+
   return (
     <>
-      <div>
-        {filterText}
-      </div>
       <Filter onFilter={ onFilterHandler }></Filter>
-      <UserTable isLoading={ isLoading } sorted={ users }></UserTable>
+      <UserTable isLoading={ isLoading } sorted={ users } editUser={ onEditUserHandler }
+        userCount={ values?.length }></UserTable>
     </>
    
   );
 };
 
-export default Users;
+export default React.memo(Users);

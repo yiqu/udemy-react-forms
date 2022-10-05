@@ -6,8 +6,8 @@ import useWhyDidYouUpdate from '../../shared/hooks/whyDidYouUpdate';
 const Filter = (props) => {
   const [filterText, setFilterText] = useState("");
 
-  const filterSubmitHandler = () => {
-    
+  const filterSubmitHandler = (event) => {
+    event.preventDefault();
   };
 
   const filterChangeHandler = (event) => {
@@ -17,12 +17,12 @@ const Filter = (props) => {
 
   return (
     <React.Fragment>
-      <form className="d-flex justify-content-start align-items-center mb-2">
+      <form className="d-flex justify-content-center align-items-center mb-2">
         <div className="form-group mb-0">
-          <input type="text" className="form-control" id="filter" placeholder="Filter..." value={ filterText }
+          <input type="text" className="form-control-sm mr-1" id="filter" placeholder="Filter..." value={ filterText }
           onChange={ filterChangeHandler }/>
         </div>
-        <button type="submit" className="btn btn-primary" onClick={ filterSubmitHandler }>Filter</button>
+        <button type="submit" className="btn btn-primary btn-sm" onClick={ filterSubmitHandler }>Filter</button>
       </form>
     </React.Fragment>
   );

@@ -2,6 +2,13 @@ table {
   font-family: arial, sans-serif;
   border-collapse: collapse;
   width: 100%;
+
+}
+
+.btn.table-edit {
+  padding: 0.05rem 0.5rem;
+  font-size: 0.7rem;
+  line-height: 0.8rem;
 }
 
 td, th {
@@ -12,5 +19,10 @@ td, th {
 }
 
 tr:nth-child(even) {
-  background-color: #dddddd;
+  background-color: #eeeeee57;
+}
+
+tr:hover {
+  background-color: #dae5e4;
+  font-style: italic;
 }

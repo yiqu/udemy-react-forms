@@ -6,6 +6,12 @@ import useWhyDidYouUpdate from '../../shared/hooks/whyDidYouUpdate';
 
 const UserTable = (props) => {
 
+  const onEditHandler = (user) => {
+    return (event) => {
+      props.editUser(user);
+    };
+  };
+
   return (
     <>
       {
@@ -19,7 +25,7 @@ const UserTable = (props) => {
       (
         <div>
           <div className='poppins fs-13 mb-2'>
-            There are currently {  } users.
+            Showing { props.sorted.length } out of { props.userCount } users.
           </div>
           <table>
             <tbody>
@@ -34,26 +40,38 @@ const UserTable = (props) => {
                 <th>Job</th>
                 <th>ID</th>
                 <th>Date Added</th>
+                <th>Last Updated</th>
+                <th>Actions</th>
               </tr>
 
               { props.sorted.map((res) => {
-            return (
-              <tr key={ res.id }>
-                <td>{res.firstName}</td>
-                <td>{res.middleName}</td>
-                <td>{res.lastName}</td>
-                <td>{res.sex}</td>
-                <td>{res.age}</td>
-                <td>{res.address}</td>
-                <td>{res.email}</td>
-                <td>{res.jobTitle}</td>
-                <td>{res.id.slice(0, 5)}</td>
-                <td>
-                  <DateDisplay date={ res.dateAdded }></DateDisplay>
-                </td>
-              </tr>
-            );
-          }) }
+                  return (
+                    <tr key={ res.id }>
+                      <td>{res.firstName}</td>
+                      <td>{res.middleName}</td>
+                      <td>{res.lastName}</td>
+                      <td>{res.sex}</td>
+                      <td>{res.age}</td>
+                      <td>{res.address}</td>
+                      <td>{res.email}</td>
+                      <td>{res.jobTitle}</td>
+                      <td>{res.id.slice(0, 5)}</td>
+                      <td>
+                        <DateDisplay date={ res.dateAdded }></DateDisplay>
+                      </td>
+                      <td>
+                        <DateDisplay date={ res.lastUpdated }></DateDisplay>
+                      </td>
+                      <td>
+                        <button onClick={ onEditHandler(res) }
+                          className={ `btn btn-sm btn-outline-info ${styles['table-edit']} ${styles.btn}` }>
+                          Edit
+                        </button>
+                      </td>
+                    </tr>
+                  );
+                }) 
+              }
             </tbody>
           </table>
         </div>
@@ -64,4 +82,4 @@ const UserTable = (props) => {
   );
 };
 
-export default UserTable;
+export default React.memo(UserTable);

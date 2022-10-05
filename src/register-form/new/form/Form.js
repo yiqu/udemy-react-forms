@@ -133,8 +133,8 @@ const UserForm = ({formik, randomUser, submitFn, apiLoading, cancelAddFn}) => {
        
           <div className='d-flex justify-content-between'>
             <div>
-              <button className="btn btn-primary btn-sm mr-2" onClick={ submitHandler } type="button"
-            disabled={ apiLoading }>{ apiLoading ? 'Working...' : 'Submit' }</button>
+              <button className="btn btn-success btn-sm mr-2" onClick={ submitHandler } type="button"
+                disabled={ apiLoading }>{ apiLoading ? 'Working...' : 'Submit' }</button>
               <button type="button" className="btn btn-info btn-sm" onClick={ resetCurrentForm }>Reset</button>
             </div>
          

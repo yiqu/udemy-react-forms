@@ -1,15 +1,19 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
 import * as fromFireRest from './shared/rest/fire-rest';
+import { scrollToTop } from './shared/utils/window-utils';
+
 
 export const RegisterFormContext = React.createContext({
   defaultUser: {},
   previousAddedUser: {},
   isAddingNewUser: false,
+  isEditingUser: false,
   addUser: () => {},
   postUserFn: () => {},
   getRandomUser: () => {},
-  cancelAddFn: () => {}
+  cancelAddFn: () => {},
+  editUser: () => {}
 });
 
 export const getUser = () => {
@@ -45,6 +49,7 @@ const RegisterFormProvider = (props) => {
   const [defaultUser, setdefaultUser] = useState(getUser());
   const [apiLoading, setApiLoading] = useState(false);
   const [isAddingNewUser, setIsAddingNewUser] = useState(false);
+  const [isEditingUser, setIsEditingUser] = useState(false);
 
   const updatePreviousAddedUserHandler = (user) => {
     setPreviousAddedUser((prev) => {
@@ -55,13 +60,28 @@ const RegisterFormProvider = (props) => {
   };
 
   const addNewUser = (user) => {
-    console.log("submit: ", user);
-    const u = {
-      dateAdded: new Date().getTime(),
+    console.log("submit: ", user, 'is editing: '+ isEditingUser);
+    let u = {
       ...user
     };
+    let restOperation;
+    if (isEditingUser) {
+      u = {
+        ...u,
+        lastUpdated: new Date().getTime()
+      };
+      restOperation = fromFireRest.editUserRef(u);
+    } else {
+      u = {
+        ...u,
+        dateAdded: new Date().getTime()
+      };
+      restOperation = fromFireRest.getAddUserRef(u); 
+    }
+
     setApiLoading(true);
-    fromFireRest.getAddUserRef(u).then((res) => {
+    
+    restOperation.then((res) => {
       return res;
     }).catch((err) => {
       console.log(err);
@@ -78,9 +98,18 @@ const RegisterFormProvider = (props) => {
   };
 
   const addUserToggle = (add) => {
+    setIsEditingUser(false);
+    getRandomUser();
     setIsAddingNewUser((prev) => {
       return add === undefined ? !prev : add;
     });
+  };
+
+  const editUserHandler = (user) => {
+    setIsAddingNewUser(true);
+    setIsEditingUser(true);
+    setdefaultUser(user);
+    scrollToTop();
   };
 
   const contextValue = {
@@ -88,10 +117,12 @@ const RegisterFormProvider = (props) => {
     previousAddedUser: previousAddedUser,
     apiLoading: apiLoading,
     isAddingNewUser: isAddingNewUser,
+    isEditingUser: isEditingUser,
     addUser: addNewUser,
     postUserFn: fromFireRest.getAddUserRef,
     getRandomUser: getRandomUser,
-    cancelAddFn: addUserToggle
+    cancelAddFn: addUserToggle,
+    editUser: editUserHandler
   };
 
   return (

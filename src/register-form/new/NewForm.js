@@ -33,9 +33,9 @@ const NewForm = () => {
 
       {
         registerContext.isAddingNewUser ? (
-          <>
+          <div className={ `${styles.box}` }>
             <div>
-              <button onClick={ randomUserHandler } className='btn btn-info mb-3'>Randomize a user</button>
+              <button onClick={ randomUserHandler } className='btn btn-info btn-sm mb-3'>Randomize a user</button>
             </div>
             <Formik
               initialValues={ registerContext.defaultUser }
@@ -50,10 +50,10 @@ const NewForm = () => {
                 }
               }
             </Formik>
-          </>
+          </div>
         ) :
         (
-          <button className='btn btn-primary' onClick={ registerContext.cancelAddFn }>Add new user</button>
+          <button className='btn btn-primary btn-sm' onClick={ registerContext.cancelAddFn }>Add new user</button>
         )
       }
       

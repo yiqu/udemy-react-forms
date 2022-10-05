@@ -8,7 +8,7 @@ import NewForm from './new/NewForm';
 
 const Registration = () => {
   return (
-    <div className='mb-3'>
+    <div className={ `mb-3` }>
 
       <NewForm></NewForm> 
 

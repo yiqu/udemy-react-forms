@@ -38,3 +38,12 @@ export const getAddUserRef = (payload) => {
   });
   return docRef;
 };
+
+
+export const editUserRef = (payload) => {
+  console.log("user ->", payload);
+  const userEditingRef = doc(regUserRef, payload.id);
+  return updateDoc(userEditingRef, {
+    ...payload
+  });
+};
