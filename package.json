@@ -1,7 +1,7 @@
 {
   "name": "udemy-react-forms",
-  "version": "0.1.0",
-  "private": true,
+  "version": "1.0.0",
+  "private": false,
   "homepage": "https://yiqu.github.io/udemy-react-forms",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
